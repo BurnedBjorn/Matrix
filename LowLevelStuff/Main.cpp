@@ -142,7 +142,7 @@ void Matrix::print()
 		{
 			
 			cout << container[(i)*columns + ii]<<';';
-			cout<<'(' << (i)*columns+ii << ')'<<' ';
+			//cout<<'(' << (i)*columns+ii << ')'<<' ';
 		}
 		cout << '}';
 	}
