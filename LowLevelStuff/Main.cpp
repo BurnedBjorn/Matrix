@@ -28,9 +28,15 @@ private:
 	int columns=0;
 };
 
-Matrix::Matrix(int r, int c):rows{r},columns{c}, container{new double[r*c]}
+Matrix::Matrix(int r, int c):rows{r},columns{c}
 {
-	for (int i = 0; i < r*c; i++)
+	if (r*c<=0)
+	{
+		cout << "\nerror: weird number of rows or columns. number of rows set to 1. number of columns set to 1.\n";
+		rows = 1, columns = 1;
+	}
+	container = new double[rows * columns];
+	for (int i = 0; i < rows*columns; i++)
 	{
 		container[i] = 0;
 	}
@@ -98,7 +104,7 @@ Matrix& Matrix::operator+(const Matrix& other)
 {
 	if (!compatible(other))
 	{
-		cout << "error:can't add incompatible matrices\n";
+		cout << "\nerror:can't add incompatible matrices, returned self with no change\n";
 		return *this;
 	}
 	for (int i = 0; i < rows*columns; i++)
@@ -115,7 +121,7 @@ double& Matrix::operator()(int row, int column)
 		
 	if ((r>rows)||(c>columns)||(r<0)||(c<0))
 	{
-		std::cout << "error: row or column out of range\n";
+		std::cout << "\nerror: row or column out of range, change applied to first row first column\n";
 		return container[0];
 	}
 	//cout << (r * columns) + c<<endl;
@@ -150,7 +156,7 @@ void Matrix::print()
 
 int main()
 {
-	Matrix a(3, 3);
+	Matrix a(2, 3);
 	int b = 0;
 	for (int i = 0; i < a.get_rows(); i++)
 	{
@@ -160,6 +166,7 @@ int main()
 			a(i + 1, ii + 1) = b;
 		}
 	}
+	a(2, 3) = 18;
 	
 	a.print();
 }
