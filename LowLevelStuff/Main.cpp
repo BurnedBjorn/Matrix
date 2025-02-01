@@ -16,6 +16,7 @@ public:
 	Matrix& operator+(const Matrix& other);
 	double& operator()(int row, int column);
 	
+	
 	bool compatible(const Matrix& other);
 
 	void print();
@@ -128,6 +129,30 @@ double& Matrix::operator()(int row, int column)
 	return container[(r)*columns+c];
 }
 
+istream& operator>>(istream& is,Matrix& m)
+{
+	cout << "input matrix of doubles. dimensions: " << (m.get_rows() ) << " rows by " << (m.get_columns() ) << "columns.\n";
+	for (int i = 0; i < m.get_rows(); i++)
+	{
+		std::cout << "input row " << i + 1  << ":\n";
+		for (int ii = 0; ii < m.get_columns(); ii++)
+		{
+			std::cout << "input column " << ii +1 << " > ";
+			double input = 0;
+			is >> input;
+			while (!is)
+			{
+				std::cout << "something is wrong with the input, try again\n>";
+				is >> input;
+			}
+			(m)(i+1, ii+1) = input;
+		}
+		
+	}
+	std::cout << "\n thank you, that's it\n";
+	return is;
+}
+
 
 bool Matrix::compatible(const Matrix& other)
 {
@@ -167,7 +192,7 @@ int main()
 		}
 	}
 	a(2, 3) = 18;
-	
+	cin >> a;
 	a.print();
 }
 
