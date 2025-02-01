@@ -139,13 +139,25 @@ istream& operator>>(istream& is,Matrix& m)
 		{
 			std::cout << "input column " << ii +1 << " > ";
 			double input = 0;
-			is >> input;
-			while (!is)
+			bool senterrormessage = 0;
+			
+			while (!(is>>input))
 			{
-				std::cout << "something is wrong with the input, try again\n>";
-				is >> input;
+				is.clear();
+				is.ignore();
+
+				if (!senterrormessage)
+				{
+					cout << "\nbad input, try again\n" << "input column " << ii + 1 << " > ";
+					senterrormessage = 1;
+				}
+				
+				
+				
 			}
-			(m)(i+1, ii+1) = input;
+			
+			m(i + 1, ii + 1) = input;
+
 		}
 		
 	}
@@ -185,17 +197,9 @@ void Matrix::print(ostream& os) const
 
 int main()
 {
-	Matrix a(5, 5);
+	Matrix a(2, 2);
 	int b = 0;
-	for (int i = 0; i < a.get_rows(); i++)
-	{
-		for (int ii = 0; ii < a.get_columns(); ii++)
-		{
-			b++;
-			a(i + 1, ii + 1) = b;
-		}
-	}
-	a(2, 3) = 18;
+	
 	cin >> a;
 	cout << a;
 }
