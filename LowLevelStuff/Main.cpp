@@ -19,7 +19,7 @@ public:
 	
 	bool compatible(const Matrix& other);
 
-	void print();
+	void print(ostream& os) const;
 
 	int get_rows()const { return rows; }
 	int get_columns()const { return columns; }
@@ -153,6 +153,10 @@ istream& operator>>(istream& is,Matrix& m)
 	return is;
 }
 
+ostream& operator<<(ostream& os, const Matrix& m) {
+	m.print(os);
+	return os;
+}
 
 bool Matrix::compatible(const Matrix& other)
 {
@@ -164,24 +168,24 @@ bool Matrix::compatible(const Matrix& other)
 	return true;
 }
 
-void Matrix::print()
+void Matrix::print(ostream& os) const
 {
 	for (int i = 0; i < rows; i++)
 	{
-		cout << '\n' << '{';
+		os << '\n' << '{';
 		for (int ii = 0; ii < columns; ii++)
 		{
 			
-			cout << container[(i)*columns + ii]<<';';
+			os << container[(i)*columns + ii]<<';';
 			//cout<<'(' << (i)*columns+ii << ')'<<' ';
 		}
-		cout << '}';
+		os << '}';
 	}
 }
 
 int main()
 {
-	Matrix a(2, 3);
+	Matrix a(5, 5);
 	int b = 0;
 	for (int i = 0; i < a.get_rows(); i++)
 	{
@@ -193,6 +197,6 @@ int main()
 	}
 	a(2, 3) = 18;
 	cin >> a;
-	a.print();
+	cout << a;
 }
 
