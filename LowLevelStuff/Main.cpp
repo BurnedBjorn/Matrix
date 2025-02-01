@@ -131,7 +131,7 @@ double& Matrix::operator()(int row, int column)
 
 istream& operator>>(istream& is,Matrix& m)
 {
-	cout << "input matrix of doubles. dimensions: " << (m.get_rows() ) << " rows by " << (m.get_columns() ) << "columns.\n";
+	cout << "\ninput matrix of doubles. dimensions: " << (m.get_rows() ) << " rows by " << (m.get_columns() ) << "columns.\n";
 	for (int i = 0; i < m.get_rows(); i++)
 	{
 		std::cout << "input row " << i + 1  << ":\n";
@@ -197,10 +197,6 @@ void Matrix::print(ostream& os) const
 
 int main()
 {
-	Matrix a(2, 2);
-	int b = 0;
 	
-	cin >> a;
-	cout << a;
 }
 
